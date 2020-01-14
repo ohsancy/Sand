@@ -9,6 +9,19 @@ class Terms {
   final String abbr;
   // 描述
   final String desc;
+  // 标签
+  final String tag;
 
-  Terms(this.id, this.zh_name, this.en_name, this.abbr, this.desc);
+  Terms(this.id, this.zh_name, this.en_name, this.abbr, this.desc, this.tag);
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': this.id,
+      'zh_name': this.zh_name,
+      'en_name': this.en_name,
+      'abbr': this.abbr,
+      'desc': this.desc,
+      'tag': this.tag
+    };
+  }
 }

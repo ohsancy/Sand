@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sand/db/db.dart';
 import 'package:sand/navigation_bar.dart';
+import 'package:sand/terms/terms_model.dart';
 
 void main() async {
   // 如果要在runApp之前有其他初始化步骤需先调用此方法。
   WidgetsFlutterBinding.ensureInitialized();
   await DB().init();
+  // load data
+  await TermsModel.instance.loadData();
   runApp(MyApp());
 }
 
