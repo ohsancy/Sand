@@ -3,11 +3,11 @@ import 'package:sand/db/dao/terms_dao.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DB {
-  static final DB _instance = DB._internal();
+  static final DB instance = DB._internal();
 
   Database database;
 
-  factory DB() => _instance;
+  factory DB() => instance;
 
   DB._internal();
 

@@ -1,15 +1,15 @@
-import 'package:sand/db/db.dart';
+import 'package:sand/db/dao/base_dao.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sand/db/constants.dart' as constants;
 
 import '../entities/terms.dart';
 
-class TermsDao {
+class TermsDao extends BaseDao {
   static TermsDao instance = TermsDao._interanl();
 
   factory TermsDao() => instance;
 
-  TermsDao._interanl();
+  TermsDao._interanl() : super(constants.TABLE_TERMS);
 
   void createTable(Batch batch) {
     batch.execute('''CREATE TABLE terms(
@@ -20,16 +20,11 @@ class TermsDao {
       desc TEXT, tag TEXT)''');
   }
 
-  void insert(Terms terms) async {
-    Database db = DB().database;
-    await db.insert(constants.TABLE_TERMS, terms.toMap());
+  insert(Terms terms) async {
+    await super.insertOne(terms.toMap());
   }
 
-  void batchInsert(List<dynamic> list) async {
-    Batch batch = DB().database.batch();
-    for (int i = 0; i < list.length; i++) {
-      batch.insert(constants.TABLE_TERMS, list[i] as Map);
-    }
-    await batch.commit();
+  batchInsert(List<dynamic> list) async {
+    await super.insertMany(list);
   }
 }

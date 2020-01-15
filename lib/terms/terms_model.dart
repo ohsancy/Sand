@@ -14,11 +14,14 @@ class TermsModel {
 
   // load data from local file
   loadData() async {
+    TermsDao termsDao = TermsDao.instance;
+    int count = await termsDao.getCount();
+    if (count > 0) return;
     String content =
         await rootBundle.loadString(Constants.TERMS_DATA_FILE_PATH);
     Uint8List data = base64.decode(content);
     content = utf8.decode(data);
     List<dynamic> jsonData = json.decode(content);
-    TermsDao.instance.batchInsert(jsonData);
+    await termsDao.batchInsert(jsonData);
   }
 }
