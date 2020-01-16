@@ -1,4 +1,5 @@
 import 'package:sand/db/dao/base_dao.dart';
+import 'package:sand/db/db.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sand/db/constants.dart' as constants;
 
@@ -20,11 +21,17 @@ class TermsDao extends BaseDao {
       desc TEXT, tag TEXT)''');
   }
 
-  insert(Terms terms) async {
+  Future<void> insert(Terms terms) async {
     await super.insertOne(terms.toMap());
   }
 
-  batchInsert(List<dynamic> list) async {
+  Future<void> batchInsert(List<dynamic> list) async {
     await super.insertMany(list);
+  }
+
+  Future<List<Map<String, dynamic>>> query() async {
+    Database db = DB.instance.database;
+    return await db.query(this.tableName,
+        columns: ['id', 'zh_name', 'en_name', 'abbr', 'desc']);
   }
 }

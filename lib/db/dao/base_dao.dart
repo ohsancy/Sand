@@ -34,4 +34,9 @@ class BaseDao {
         await db.rawQuery('SELECT COUNT(*) AS count FROM ${this.tableName}');
     return slUtils.firstIntValue(rs);
   }
+
+  // query() {
+  //   Database db = DB.instance.database;
+  //   db.query(this.tableName, columns: [], whereArgs: [], orderBy: '');
+  // }
 }

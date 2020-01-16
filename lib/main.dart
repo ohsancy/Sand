@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DB().init();
   // load data
-  await TermsModel.instance.loadData();
+  await TermsModel().loadData();
   runApp(MyApp());
 }
 
